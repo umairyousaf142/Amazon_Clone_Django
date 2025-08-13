@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <head>
+        <title>Add New Items</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="styles/shared/general.css">
+        <link rel="stylesheet" href="styles/shared/amazon-header.css">
+        <link rel="stylesheet" href="styles/pages/amazon.css">
+      </head>
+      <body>
+        <div class="amazon-header">
+          <div class="amazon-header-left-section">
+            <a href="amazon.html" class="header-link">
+              <img class="amazon-logo"
+                src="images/amazon-logo-white.png">
+              <img class="amazon-mobile-logo"
+                src="images/amazon-mobile-logo-white.png">
+            </a>
+          </div>
+    
+          <div class="amazon-header-middle-section middle">
+            <input class="search-bar" type="text" placeholder="Search">
+    
+            <button class="search-button bar">
+              <img class="search-icon icon" src="images/icons/search-icon.png">
+            </button>
+          </div>
+    
+          <div class="amazon-header-right-section">
+            <a class="orders-link header-link" href="Inputdata.html">
+              <span class="returns-text">Add New</span>
+              <span class="orders-text">Items</span>
+            </a>
+    
+            <a class="cart-link header-link" href="checkout.html">
+              <img class="cart-icon" src="images/icons/cart-icon.png">
+              <div class="cart-quantity js-cart-quantity">0</div>
+              <div class="cart-text">Cart</div>
+            </a>
+          </div>
+        </div>
+    <style>
+        /* body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 0;
+        } */
+         .bar{
+            border-radius: 2px;
+            height: 38px;
+            }
+        .middle{
+            margin: 0px;
+            margin-top: 10px;
+            margin-right: 10px;
+
+        }
+        .icon{
+            margin: 0px;
+        }
+        .form-container {
+            background-color: white;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px 30px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            font-size: 1.5em;
+            color: #007185;
+            margin-bottom: 20px;
+        }
+        label {
+            font-size: 0.9em;
+            color: #333;
+            margin-bottom: 8px;
+            display: block;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1em;
+            box-sizing: border-box;
+            outline: none;
+        }
+        input:focus, textarea:focus {
+            border-color: #FFA41C;
+            box-shadow: 0 0 4px #FFA41C;
+        }
+        .form-group {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
+        .form-group div {
+            flex: 1;
+        }
+        .form-group input {
+            width: 100%;
+        }
+        button {
+            background-color: #FFA41C;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #e08e1a;
+        }
+        .form-container .message {
+            color: #28a745;
+            font-size: 1.1em;
+            margin-top: 15px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="form-container">
+    <h2>Add a New Product</h2>
+    <form class="productForm">
+        <label for="name">Product Name</label>
+        <input type="text" id="name" placeholder="Enter product name" required>
+        
+        <label for="id">Product ID</label>
+        <input type="alphanumeric" id="id" placeholder="Enter product ID" required>
+
+        <label for="image">Product Image URL</label>
+        <input type="text" id="image" placeholder="Enter image URL" required>
+
+        <label for="price">Price (in Cents)</label>
+        <input type="number" id="price" placeholder="Enter price in cents" required>
+
+        <div class="form-group">
+            <div>
+                <label for="rating">Rating (out of 5)</label>
+                <input type="number" id="rating" step="0.1" min="0" max="5" placeholder="Enter rating" required>
+            </div>
+            <div>
+                <label for="ratingCount">Rating Count</label>
+                <input type="number" id="ratingCount" placeholder="Enter rating count" required>
+            </div>
+        </div>
+
+        <label for="keywords">Keywords (comma separated)</label>
+        <input type="text" id="keywords" placeholder="Enter keywords separated by commas" required>
+
+        <button type="submit">Add Product</button>
+        <div class="message">Product added successfully!</div>
+    </form>
+</div>
+<script type="module" src="/data/products.js"></script>
+</body>
+</html>

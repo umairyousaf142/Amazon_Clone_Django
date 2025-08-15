@@ -21,6 +21,13 @@ class registerUserSerializer(serializers.ModelSerializer):
         return user
     
 
+from rest_framework import serializers
+from rest_framework.exceptions import AuthenticationFailed
+from django.contrib.auth import authenticate
+from rest_framework_simplejwt.tokens import RefreshToken
+from authenticateUser.models import AmazonUsers  # make sure this path is correct
+
+
 class LoginSerializer(serializers.Serializer):
     email = serializers.EmailField()
     password = serializers.CharField(write_only=True)
@@ -29,8 +36,17 @@ class LoginSerializer(serializers.Serializer):
         email = data.get("email")
         password = data.get("password")
 
-        # Use Django's authenticate() method
-        user = authenticate(username=email, password=password)  # username=email because USERNAME_FIELD=email
+        if email is None or password is None:
+            raise serializers.ValidationError("Email and password are required.")
+
+        # Check if user exists before attempting authentication
+        try:
+            AmazonUsers.objects.get(email=email)
+        except AmazonUsers.DoesNotExist:
+            raise AuthenticationFailed("User with this email does not exist.")
+
+        # Use Django's authentication system
+        user = authenticate(username=email, password=password)  # works if USERNAME_FIELD = 'email'
 
         if user is None:
             raise AuthenticationFailed("Invalid email or password")

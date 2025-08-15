@@ -14,6 +14,7 @@ from rest_framework.views import APIView
 
 from .models import *
 from .serializers import *
+from product.urls import *
 
 
 
@@ -23,7 +24,8 @@ def api_root(request, format=None):
     return Response({
         'register': reverse('register', request=request, format=format),
         'login': reverse('login', request=request, format=format),
-        'logout': reverse('logout', request=request, format=format)
+        'logout': reverse('logout', request=request, format=format),
+        'Add Products': reverse('product-list', request=request, format=format),
     })
 
 

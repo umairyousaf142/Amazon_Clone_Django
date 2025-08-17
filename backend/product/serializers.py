@@ -1,38 +1,28 @@
 from rest_framework import serializers
 from .models import *
 
-# class ProductSerializer(serializers.ModelSerializer):
-#     image_url = serializers.SerializerMethodField()
 
-#     class Meta:
-#         model = addProduct
-#         fields = '__all__'
-
-#     def get_image_url(self, obj):
-#         # Safely get the full Cloudinary URL of the image
-#         if obj.image:
-#             return obj.image.url
-#         return None
-
-
-
-class ProductSerializer(serializers.ModelSerializer):
-    rating = serializers.SerializerMethodField()
+class AddProductSerializer(serializers.ModelSerializer):
     priceCents = serializers.IntegerField(source='price_cents')
-    image_url = serializers.SerializerMethodField()
-    
+    keywords = serializers.SerializerMethodField()
+
+    rating = serializers.FloatField(min_value=0, max_value=5)
+    rating_count = serializers.IntegerField()
+
     class Meta:
         model = addProduct
-        fields = ['id', 'image', 'image_url', 'name', 'rating', 'priceCents', 'keywords']
+        fields = ['id', 'image', 'name', 'rating', 'rating_count', 'priceCents', 'keywords', 'product_id', 'word']
 
-    def get_image_url(self, obj):
-        # Safely get the full Cloudinary URL of the image
-        if obj.image:
-            return obj.image.url
-        return None
+    def get_keywords(self, obj):
+        return [obj.word] if obj.word else []
 
-    def get_rating(self, obj):
-        return {
-            "stars": obj.rating_stars,
-            "count": obj.rating_count
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+
+        data['rating'] = {
+            "stars": instance.rating,
+            "count": instance.rating_count
         }
+
+        data['image'] = instance.image.url if instance.image else ""
+        return data
